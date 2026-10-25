@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>Vishal Creator AI</title>
+<style>
+:root{--bg:#0b1020;--panel:#151d32;--panel2:#1d2942;--text:#f4f7ff;--muted:#aab6d3;--accent:#8b5cf6;--accent2:#ec4899;--line:#303d5b}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#28205a 0,#0b1020 42%);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans Devanagari",sans-serif}
+.wrap{max-width:900px;margin:auto;padding:18px}.hero{padding:22px 4px 18px}.logo{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:22px}.mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-size:22px}
+.tag{color:#d8caff;background:#37266c;border:1px solid #6546b7;border-radius:999px;padding:5px 10px;font-size:12px;display:inline-block;margin-top:12px}
+h1{font-size:29px;line-height:1.2;margin:15px 0 8px}p{color:var(--muted);line-height:1.6;margin:7px 0}.panel{background:rgba(21,29,50,.94);border:1px solid var(--line);border-radius:20px;padding:17px;margin:14px 0;box-shadow:0 12px 35px #0002}
+label{display:block;font-size:14px;color:#d9e1f5;margin:13px 0 7px}input,select,textarea{width:100%;background:#0e1629;color:var(--text);border:1px solid #3a496b;border-radius:12px;padding:13px;font:inherit;outline:none}textarea{min-height:95px;resize:vertical}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+button{border:0;border-radius:12px;padding:13px 12px;font:700 14px system-ui;cursor:pointer;color:white;background:linear-gradient(135deg,#7c3aed,#db2777)}button.secondary{background:#26334f;border:1px solid #415274;color:#e8edff}button:active{transform:scale(.99)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}.tab{background:#1b2640;border:1px solid #394866;padding:9px 12px;border-radius:999px;color:#dce5ff;cursor:pointer;font-size:13px}.tab.active{background:#49308b;border-color:#9270ef}
+.result{white-space:pre-wrap;line-height:1.7;color:#eef2ff;background:#0d1527;border:1px solid #2d3b5a;border-radius:13px;padding:14px;min-height:100px;overflow-wrap:anywhere}.resulthead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.resulthead h3{margin:0;font-size:17px}.small{font-size:12px;color:var(--muted)}.notice{font-size:12px;color:#c8d2eb;background:#10192b;border-radius:12px;padding:12px;line-height:1.6}.footer{text-align:center;color:#7f8cab;font-size:12px;padding:18px}
+@media(max-width:560px){.wrap{padding:13px}.grid,.actions{grid-template-columns:1fr}h1{font-size:25px}.panel{padding:14px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="logo"><div class="mark">✦</div><span>Vishal Creator AI</span></div><br>
+    <span class="tag">YOUR YOUTUBE CREATION STUDIO</span>
+    <h1>अपने YouTube कंटेंट को नया अंदाज़ दो 🎬</h1>
+    <p>गानों, वीडियो टाइटल, डिस्क्रिप्शन, टैग्स और थंबनेल प्रॉम्प्ट के लिए एक आसान हिंदी क्रिएटर डैशबोर्ड।</p>
+  </header>
+
+  <section class="panel">
+    <h2 style="margin:0 0 4px;font-size:20px">अपना कंटेंट तैयार करें</h2>
+    <p class="small">जानकारी भरो और नीचे दिए गए बटन से ड्राफ्ट बनाओ।</p>
+    <label for="topic">वीडियो या गाने का विषय</label>
+    <input id="topic" placeholder="जैसे: दर्द भरा प्यार, Free Fire, Granny Live" value="तेरी याद में">
+    <div class="grid">
+      <div><label for="kind">क्या बनाना है?</label><select id="kind"><option value="song">गाने के लिरिक्स</option><option value="title">YouTube टाइटल</option><option value="desc">डिस्क्रिप्शन और टैग्स</option><option value="thumb">थंबनेल प्रॉम्प्ट</option><option value="bundle">पूरा YouTube पैक</option></select></div>
+      <div><label for="mood">मूड / स्टाइल</label><select id="mood"><option>रोमांटिक</option><option>सैड / इमोशनल</option><option>डार्क / सिनेमैटिक</option><option>गेमिंग / एनर्जेटिक</option><option>मज़ेदार</option></select></div>
+    </div>
+    <label for="details">ज़रूरी बातें (वैकल्पिक)</label>
+    <textarea id="details" placeholder="जैसे: 3 मिनट का गाना, बारिश वाला सीन, हिंदी में..."></textarea>
+    <div class="actions">
+      <button onclick="generate()">✨ ड्राफ्ट बनाओ</button>
+      <button class="secondary" onclick="clearAll()">रीसेट करो</button>
+    </div>
+  </section>
+
+  <section class="panel" id="outputPanel">
+    <div class="resulthead"><h2 style="margin:0;font-size:20px">तुम्हारा रिज़ल्ट</h2><span class="small">ड्राफ्ट</span></div>
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('main',this)">मुख्य रिज़ल्ट</button>
+      <button class="tab" onclick="showTab('titles',this)">टाइटल</button>
+      <button class="tab" onclick="showTab('tags',this)">टैग्स</button>
+      <button class="tab" onclick="showTab('thumb',this)">थंबनेल</button>
+    </div>
+    <div id="result" class="result" style="margin-top:13px">यहाँ तुम्हारा कंटेंट दिखेगा। ऊपर विषय लिखकर “ड्राफ्ट बनाओ” दबाओ।</div>
+    <button class="secondary" style="width:100%;margin-top:10px" onclick="copyResult()">📋 रिज़ल्ट कॉपी करो</button>
+  </section>
+
+  <div class="notice"><b>ज़रूरी बात:</b> यह वेबसाइट Gemini AI से सुरक्षित Netlify Function के ज़रिए जुड़ने के लिए तैयार है। पहले Netlify में GEMINI_API_KEY environment variable सेट करें और Git-connected deploy करें। API usage limits लागू हो सकती हैं।</div>
+  <div class="footer">Vishal Creator AI · बनाया गया तुम्हारे YouTube क्रिएशन वर्कफ़्लो के लिए</div>
+</div>
+<script>
+let outputs={main:"",titles:"",tags:"",thumb:""};
+async function generate(){
+ const topic=document.getElementById('topic').value.trim()||'मेरा नया वीडियो';
+ const kind=document.getElementById('kind').value;
+ const mood=document.getElementById('mood').value;
+ const details=document.getElementById('details').value.trim();
+ const btn=document.querySelector('.actions button');
+ btn.disabled=true; btn.textContent='⏳ AI कंटेंट बना रहा है...';
+ document.getElementById('result').textContent='Gemini AI से जवाब आ रहा है, थोड़ा इंतज़ार करें...';
+ try {
+   const response=await fetch('/.netlify/functions/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic,kind,mood,details})});
+   const data=await response.json();
+   if(!response.ok) throw new Error(data.error||'AI से जवाब नहीं मिला।');
+   outputs.main=data.main||'';
+   outputs.titles=data.titles||'';
+   outputs.tags=data.tags||'';
+   outputs.thumb=data.thumb||'';
+   document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('active',i===0));
+   render('main');
+ } catch(err) {
+   document.getElementById('result').textContent='AI से कनेक्शन नहीं हो पाया: '+(err.message||'कृपया बाद में फिर कोशिश करें।')+'
+
+अगर वेबसाइट अभी Netlify Functions के साथ deploy नहीं हुई है, तो function उपलब्ध नहीं होगा।';
+ } finally { btn.disabled=false; btn.textContent='✨ ड्राफ्ट बनाओ'; }
+}
+function render(which){document.getElementById('result').textContent=outputs[which]||'पहले “ड्राफ्ट बनाओ” दबाओ।';}
+function showTab(which,btn){document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render(which);}
+async function copyResult(){const t=document.getElementById('result').textContent;try{await navigator.clipboard.writeText(t);alert('कॉपी हो गया!')}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();alert('कॉपी हो गया!')}}
+function clearAll(){document.getElementById('topic').value='';document.getElementById('details').value='';document.getElementById('result').textContent='यहाँ तुम्हारा कंटेंट दिखेगा। ऊपर विषय लिखकर “ड्राफ्ट बनाओ” दबाओ।';outputs={main:'',titles:'',tags:'',thumb:''};}
+</script>
+</body>
+</html>
